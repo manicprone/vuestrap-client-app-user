@@ -1,0 +1,93 @@
+
+Vue.use(ClientAppUser, {
+  logInit: true,
+  debugInit: false,
+  debug: false,                    --> hydrate/sync
+  debugRequests: false,
+  debugNormalizer: false,
+  store,
+  syncMode: true,                  --> enable sync mode // TODO: Move this option inside each of the resource settings !!!
+  api: userConfig.api,
+  user: userConfig.user,
+  userProfile: userConfig.userProfile,
+  userPrefs: userConfig.userPrefs,
+  hydrateUserOn: 'auth/setUserInfo',
+  clearUserOn: 'auth/clearSession',
+})
+
+
+------------
+API Settings
+------------
+
+// Global API settings (can be overridden on the resource level)
+api: {
+  baseURL,        --> the base URL of the API request (protocol + host + port)
+  prefixURI,      --> the prefix URI of the API request (default: '')
+  contentType,    --> sets the 'Content-Type' and 'Accept' headers to this value (default: application/json)
+  postForUpdate,  --> use POST instead of PUT (default: PUT)
+  timeout,        --> request timeout in ms (default: 30*1000ms)
+  assocNameMap,   --> a mapping object to define name transformations of associations (during normalization)
+  auth: {
+    scheme: 'bearer-token',          --> auth scheme to implement, options: null|bearer-token|custom-header (default: null)
+    tokenGetter: 'auth/authToken',   --> vuex getter path for auth token value
+    tokenHeaderName: <header_name>,  --> header name for 'custom-header' scheme
+  },
+},
+
+-------------
+User Settings
+-------------
+
+user: {
+  idField: 'id',                   --> the ID field for the local app user (default: 'id')
+  externalIdField: 'external_id',  --> the external ID field for the source user resource, for syncMode (default: 'external_id')
+  endpoints: {
+    create: '/user',
+    update: { uri: '/user/:id', params: { with: 'profile' } },
+    fetch: { uri: '/user', params: { with: 'profile' } },
+  },
+  sync: true|false          --> whether or not to sync data into local database  // TODO: not yet implemented !!!
+  api: { ... },             --> override api settings   // TODO: not yet implemented !!!
+  model: <the_model_shape>, --> the model object/class  // TODO: support pojo !!! (right now, only class is supported)
+  form: <the_data_form>     --> the data form for this resource // TODO: not yet implemented !!!
+  debug: false,             --> debug settings for this resource (default: false)  // TODO: not yet implemented !!!
+},
+
+---------------------
+User Profile Settings
+---------------------
+
+userProfile: {
+  externalIdField: 'external_id',   --> the ID field for the source user resource (default: 'external_id')
+  endpoints: {
+    create: '/user-profile',
+    update: '/user-profiles',
+    getOne: '/user-profile/:id',
+    getMany: { uri: '/user-profiles', params: { with: 'likes', skip: 0, limit: 5 }},  --> (support for including params)
+    delete: '/user-profile/:id',
+  },
+  api: { ... },             --> override api settings   // TODO: not yet implemented !!!
+  sync: true|false          --> whether or not to sync data into local database  // TODO: not yet implemented !!!
+  model: <the_model_shape>, --> the model object/class  // TODO: support pojo !!! (right now, only class is supported)
+  form: <the_data_form>     --> the data form for this resource // TODO: not yet implemented !!!
+  debug: false,             --> debug settings for this resource (default: false)  // TODO: not yet implemented !!!
+},
+
+-------------------
+User Prefs Settings
+-------------------
+
+userPrefs: {
+  externalIdField: 'external_id',   --> the ID field for the source user resource (default: 'external_id')
+  endpoints: {
+    create: '/user/:id/prefs',
+    update: '/user/:id/prefs',
+    fetch: '/user/:id/prefs',
+  },
+  api: { ... },             --> override api settings   // TODO: not yet implemented !!!
+  sync: true|false          --> whether or not to sync data into local database  // TODO: not yet implemented !!!
+  model: <the_model_shape>, --> the model object/class  // TODO: support pojo !!! (right now, only class is supported)
+  form: <the_data_form>     --> the data form for this resource // TODO: not yet implemented !!!
+  debug: false,             --> debug settings for this resource (default: false)  // TODO: not yet implemented !!!
+},

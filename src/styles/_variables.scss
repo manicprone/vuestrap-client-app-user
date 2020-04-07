@@ -1,0 +1,21 @@
+/* Colors */
+
+$color-primary: #A5C73C;
+
+$border-color: #E0E0E0;
+$header-color: #263238;
+$text-color: #606368;
+
+$button-font-size: 1rem;
+$button-min-width: 4rem;
+$button-padding-vertical: 0rem;
+$button-padding-horizontal: 1rem;
+$button-padding: $button-padding-vertical $button-padding-horizontal;
+$button-border-radius: 3px;
+$button-transition: box-shadow .2s cubic-bezier(.4,0,1,1),
+                    background-color .2s cubic-bezier(.4,0,.2,1),
+                    color .2s cubic-bezier(.4,0,.2,1);
+
+$dropdown-item-padding-vertical: .5rem;
+$dropdown-item-padding-horizontal: 1rem;
+$dropdown-item-padding: $dropdown-item-padding-vertical $dropdown-item-padding-horizontal;
