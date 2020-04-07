@@ -20,7 +20,7 @@
     "build-plugin"
   ],
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.18.1",
     "joint-normalizer": "0.0.4",
     "lodash": "4.17.15",
     "vue-click-outside": "^1.0.7"
